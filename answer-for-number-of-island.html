@@ -12,27 +12,26 @@ const output = countIslands(input);
 document.write("Input: " + input);
 document.write("<br>");
 document.write("<b>Output: " + output);
-
+    
 console.log(`Input : ${input}`);
 console.log(`Output : ${output}`);
 
-
-function isSafe(M,row,col,visited) {
-        return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL) && (M[row][col] == 1 && !visited[row][col]);
+function isSafe(input,row,col,visited) {
+        return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL) && (input[row][col] == 1 && !visited[row][col]);
 }
 
-function DFS(M, row, col, visited) {
+function DFS(input, row, col, visited) {
     let rowNbr = [-1, -1, -1, 0, 0, 1, 1, 1];
     let colNbr = [-1, 0, 1, -1, 1, -1, 0, 1];
     visited[row][col] = true;
     for (let k = 0; k < 8; ++k) {
-        if (isSafe(M, row + rowNbr[k], col + colNbr[k], visited)) {
-            DFS(M, row + rowNbr[k], col + colNbr[k], visited);
+        if (isSafe(input, row + rowNbr[k], col + colNbr[k], visited)) {
+            DFS(input, row + rowNbr[k], col + colNbr[k], visited);
         }
     }
 }
     
-function countIslands(M) {
+function countIslands(input) {
     let visited = new Array(ROW);
     for(let i = 0; i < ROW; i++) {
         visited[i] = new Array(COL);
@@ -47,8 +46,8 @@ function countIslands(M) {
     let count = 0;
     for (let i = 0; i < ROW; ++i) {
         for (let j = 0; j < COL; ++j) {
-            if (M[i][j] == 1 && !visited[i][j]) {
-                DFS(M, i, j, visited);
+            if (input[i][j] == 1 && !visited[i][j]) {
+                DFS(input, i, j, visited);
                 count++;
             }
         }
